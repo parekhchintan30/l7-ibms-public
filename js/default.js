@@ -28,7 +28,7 @@ jQuery(function($) {
     var active_tab1 = active_tab.split("-");
     var currentTab = "tab" + active_tab1[0];
     $("#" + currentTab).addClass("selected");
-    $("#" + active_tab).css("background-color", "#333333");
+    $("#" + active_tab).css("background-color", "#3F5E61");
     if ($('.left_accordion').length > 0) {
         $('.left_accordion').navAccordion({
                 expandButtonText: '', //Text inside of buttons can be HTML
@@ -44,6 +44,32 @@ jQuery(function($) {
         if (e.which == 13)
             return false;
     });
+
+
+    $('.input-group input').keydown(function(e){
+    if(e.which == 9){ // tab
+        e.preventDefault();
+        $(this).parent().find('.dropdown-toggle').click();
+        $(this).parent().find('.dropdown-menu a:first').focus();
+    }
+});
+
+    $('.dropdown-menu a').keydown(function(e){
+    switch(e.which){
+        case 38: // home
+            e.preventDefault();
+            $(this).closest('.dropdown-menu').find('a:first').focus();
+            break;
+        case 40: // end
+            e.preventDefault();
+            $(this).closest('.dropdown-menu').find('a:last').focus();
+            break;
+        case 27: // end
+            e.preventDefault();
+            $(this).parent().find('.dropdown-toggle').click();
+            break;
+    }
+});
 
     var now = new Date();
     var from = new Date();
