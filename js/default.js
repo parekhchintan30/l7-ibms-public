@@ -769,6 +769,30 @@ function pB_tags(key, value, date_string) {
 }
 */
 
+function calculateTotalOld() {
+    var barcode = $("#element-1 .barcode").val();
+    var i = 1;
+    var sum = 0;
+    var quantity = 0;
+
+    while (barcode != "" && barcode != null) {
+        var mrp = $("#element-" + i + " .mrp").html();
+        sum = sum + parseFloat(mrp);
+        i++;
+        quantity++;
+        barcode = $("#element-" + i + " .barcode").val();
+    }
+    if (isNaN(sum))
+        sum = 0;
+
+
+    $('#billing_amount').val(sum);
+    $('#quantity').val(quantity);
+    var total = parseFloat(sum).toFixed(2);
+    total = parseFloat(total).toFixed(2);
+    $('#total').val(total);
+}
+
 function monitorPrinting(qz) {
     if (qz != null) {
         if (!qz.isDonePrinting()) {
