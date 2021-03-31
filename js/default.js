@@ -3,8 +3,8 @@ var total_print_documents = 0;
 var total_barcodes_printed = 0;
 var qz_array = [];
 var finished = true;
-var allowedColors = ["GOLD", "LIGHT-GOLD", "DARK-GOLD", "ROSE-GOLD", "COPPER", "RED", "LIGHT-RED", "MAROON", "DARK-MAROON", "GREEN", "BOTTLE-GREEN", "PISTA-GREEN", "MEHENDI-GREEN", "LIGHT-GREEN", "LIGHT-PINK", "PARROT-GREEN", "BLUE", "LIGHT-BLUE", "ROYAL-BLUE", "NAVY-BLUE", "LIRIL", "TOMATO-PINK", "PINK", "PINKISH-MAROON", "ORANGE", "PEACH", "MULTI", "GREY", "PURPLE", "BRINJAL", "WINE", "BLACK", "YELLOW", "MUSTARD", "PINK-MULTI", "RED-MULTI", "BLUE-MULTI", "GREEN-MULTI", "YELLOW-MULTI", "WHITE", "OFF-WHITE", "CREAM", "SILVER", "ANTIC-GOLD", "SKIN", "BROWN", "MAGENTA", "MAROON-MULTI", "BLACK-MULTI", "RAMA-GREEN", "PEACOCK-BLUE", "NEON-MULTI", "FIROZI", "YELLOW-GOLD", "SKY-BLUE", "LIGHT-ORANGE", "DARK-COPPER", "ONION-PINK", "TEAL", "BEIGE", "FUCHSIA", "DARK-PINK", "OLIVE-GREEN", "MINT-GREEN", "LIME-YELLOW", "PASTEL-BLUE", "LIME-GREEN", "PASTEL-GREEN", "DUSTY-BLUE", "DUSTY-PEACH", "DARK-GREEN", "DUSTY-GREEN", "S-PINK", "GERMAN-GREEN", "FIRE-BLUE", "DARK-GRAY", "GERMAN-BLUE", "DARK-BRINJAL"];
-var allowedSizes = ["26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60", "L", "XL", "XXL", "M", "S", "XS", "XXS", "XXXL", "4XL", "28", "FS", "14Y", "6Y", "8Y", "2Y", "4Y", "10Y", "12Y", "NA", "S/M", "L/XL"];
+var allowedColors = ["GOLD", "LIGHT-GOLD", "DARK-GOLD", "ROSE-GOLD", "COPPER", "RED", "LIGHT-RED", "MAROON", "DARK-MAROON", "GREEN", "BOTTLE-GREEN", "PISTA-GREEN", "MEHENDI-GREEN", "LIGHT-GREEN", "LIGHT-PINK", "PARROT-GREEN", "BLUE", "LIGHT-BLUE", "ROYAL-BLUE", "NAVY-BLUE", "LIRIL", "TOMATO-PINK", "PINK", "PINKISH-MAROON", "ORANGE", "PEACH", "MULTI", "GREY", "PURPLE", "BRINJAL", "WINE", "BLACK", "YELLOW", "MUSTARD", "PINK-MULTI", "RED-MULTI", "BLUE-MULTI", "GREEN-MULTI", "YELLOW-MULTI", "WHITE", "OFF-WHITE", "CREAM", "SILVER", "ANTIC-GOLD", "SKIN", "BROWN", "MAGENTA", "MAROON-MULTI", "BLACK-MULTI", "RAMA-GREEN", "PEACOCK-BLUE", "NEON-MULTI", "FIROZI", "YELLOW-GOLD", "SKY-BLUE", "LIGHT-ORANGE", "DARK-COPPER", "ONION-PINK", "TEAL", "BEIGE", "FUCHSIA", "DARK-PINK", "OLIVE-GREEN", "MINT-GREEN", "LIME-YELLOW", "PASTEL-BLUE", "LIME-GREEN", "PASTEL-GREEN", "DUSTY-BLUE", "DUSTY-PEACH", "DARK-GREEN", "DUSTY-GREEN", "S-PINK", "GERMAN-GREEN", "FIRE-BLUE", "DARK-GREY", "GERMAN-BLUE", "GOLD-MULTI","SILVER-MULTI","BLACK-MULTI","DARK-BRINJAL","T.BLUE","AQUA","Z.GREEN","RANI","LEMON","MUSTARD-GOLD","ORANGE","F.GREEN","N.MAGENTA","N.GOLD","R-PINK","DC-BLUE","SEA-GREEN","DARK-BLUE","DARK-PEACH","GAJARI","VIOLET","BLACK-GOLD","BLACK-SILVER"];
+var allowedSizes = ["26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60", "L", "XL", "XXL", "M", "S", "XS", "XXS", "XXXL", "4XL", "28", "FS", "14Y", "6Y", "8Y", "2Y", "4Y", "10Y", "12Y", "NA", "S/M", "L/XL","6-12M","12-18M","18-24M","2-3Y","3-4Y","4-5Y","5-6Y","6-7Y","7-8Y","8-9Y","9-10Y","10-11Y","11-12Y","12-13Y","13-14Y"];
 var allowedStates = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir",
     "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Punjab", "Rajasthan", "Sikkim",
     "Tamil Nadu", "Tripura", "Uttaranchal", "Uttar Pradesh", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadar and Nagar Haveli", "Daman and Diu", "Delhi", "Lakshadeep", "Pondicherry"
@@ -152,11 +152,6 @@ jQuery(function($) {
             newRow += '<td class="discount"></td>';
             newRow += '<td class="taxable_value"></td>';
             newRow += '<td class="gst_rate"></td>';
-            newRow += '<td class="sgst"></td>';
-            newRow += '<td class="cgst"></td>';
-            newRow += '<td class="igst"></td>';
-            newRow += '<td class="total"></td>';
-            newRow += '<td class="net"></td>';
             newRow += '<td class="original" style="display:none;"></td>';
             $('.barcodeScanner table').append(newRow);
             // alert(" Div End reached! "+$(this).offset().top);
