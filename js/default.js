@@ -3,8 +3,8 @@ var total_print_documents = 0;
 var total_barcodes_printed = 0;
 var qz_array = [];
 var finished = true;
-var allowedColors = ["GOLD", "LIGHT-GOLD", "DARK-GOLD", "ROSE-GOLD", "COPPER", "RED", "LIGHT-RED", "MAROON", "DARK-MAROON", "GREEN", "BOTTLE-GREEN", "PISTA-GREEN", "MEHENDI-GREEN", "LIGHT-GREEN", "LIGHT-PINK", "PARROT-GREEN", "BLUE", "LIGHT-BLUE", "ROYAL-BLUE", "NAVY-BLUE", "LIRIL", "TOMATO-PINK", "PINK", "PINKISH-MAROON", "ORANGE", "PEACH", "MULTI", "GREY", "PURPLE", "BRINJAL", "WINE", "BLACK", "YELLOW", "MUSTARD", "PINK-MULTI", "RED-MULTI", "BLUE-MULTI", "GREEN-MULTI", "YELLOW-MULTI", "WHITE", "OFF-WHITE", "CREAM", "SILVER", "ANTIC-GOLD", "SKIN", "BROWN", "MAGENTA", "MAROON-MULTI", "BLACK-MULTI", "RAMA-GREEN", "PEACOCK-BLUE", "NEON-MULTI", "FIROZI", "YELLOW-GOLD", "SKY-BLUE", "LIGHT-ORANGE", "DARK-COPPER", "ONION-PINK", "TEAL", "BEIGE", "FUCHSIA", "DARK-PINK", "OLIVE-GREEN", "MINT-GREEN", "LIME-YELLOW", "PASTEL-BLUE", "LIME-GREEN", "PASTEL-GREEN", "DUSTY-BLUE", "DUSTY-PEACH", "DARK-GREEN", "DUSTY-GREEN", "S-PINK", "GERMAN-GREEN", "FIRE-BLUE", "DARK-GREY", "GERMAN-BLUE", "GOLD-MULTI","SILVER-MULTI","BLACK-MULTI","DARK-BRINJAL","T.BLUE","AQUA","Z.GREEN","RANI","LEMON","MUSTARD-GOLD","ORANGE","F.GREEN","N.MAGENTA","N.GOLD","R-PINK","DC-BLUE","SEA-GREEN","DARK-BLUE","DARK-PEACH","GAJARI","VIOLET","BLACK-GOLD","COBALT-BLUE","DARK-RED","BABY-PINK","WOOD","BLACK-SILVER"];
-var allowedSizes = ["26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60", "L", "XL", "XXL", "M", "S", "XS", "XXS", "XXXL", "4XL", "28", "FS", "14Y", "6Y", "8Y", "2Y", "4Y", "10Y", "12Y", "NA", "S/M", "L/XL","6-12M","6-9M","9-12M","12-18M","18-24M","1-2Y","2-3Y","3-4Y","4-5Y","5-6Y","6-7Y","7-8Y","8-9Y","9-10Y","10-11Y","11-12Y","12-13Y","13-14Y"];
+var allowedColors = ["GOLD", "LIGHT-GOLD", "DARK-GOLD", "ROSE-GOLD", "COPPER", "RED", "LIGHT-RED", "MAROON", "DARK-MAROON", "GREEN", "BOTTLE-GREEN", "PISTA-GREEN", "MEHENDI-GREEN", "LIGHT-GREEN", "LIGHT-PINK", "PARROT-GREEN", "BLUE", "LIGHT-BLUE", "ROYAL-BLUE", "NAVY-BLUE", "LIRIL", "TOMATO-PINK", "PINK", "PINKISH-MAROON", "ORANGE", "PEACH", "MULTI", "GREY", "PURPLE", "BRINJAL", "WINE", "BLACK", "YELLOW", "MUSTARD", "PINK-MULTI", "RED-MULTI", "BLUE-MULTI", "GREEN-MULTI", "YELLOW-MULTI", "WHITE", "OFF-WHITE", "CREAM", "SILVER", "ANTIC-GOLD", "SKIN", "BROWN", "MAGENTA", "MAROON-MULTI", "BLACK-MULTI", "RAMA-GREEN", "PEACOCK-BLUE", "NEON-MULTI", "FIROZI", "YELLOW-GOLD", "SKY-BLUE", "LIGHT-ORANGE", "DARK-COPPER", "ONION-PINK", "TEAL", "BEIGE", "FUCHSIA", "DARK-PINK", "OLIVE-GREEN", "MINT-GREEN", "LIME-YELLOW", "PASTEL-BLUE", "LIME-GREEN", "PASTEL-GREEN", "DUSTY-BLUE", "DUSTY-PEACH", "DARK-GREEN", "DUSTY-GREEN", "S-PINK", "GERMAN-GREEN", "FIRE-BLUE", "DARK-GREY", "GERMAN-BLUE", "GOLD-MULTI","SILVER-MULTI","BLACK-MULTI","DARK-BRINJAL","T.BLUE","AQUA","Z.GREEN","RANI","LEMON","MUSTARD-GOLD","ORANGE","F.GREEN","N.MAGENTA","N.GOLD","R-PINK","DC-BLUE","SEA-GREEN","DARK-BLUE","DARK-PEACH","GAJARI","VIOLET","BLACK-GOLD","COBALT-BLUE","DARK-RED","BABY-PINK","ROSE-PINK","WOOD","LIGHT-GREY","RUST","BLACK-SILVER","COFFEE","MUSTARD","YELLOW","DARK-PISTA","PARROT-GREEN","TEAL","SKY-BLUE","DARK-GREEN","ROYAL-BLUE","NAVY-BLUE","INK-BLUE","LIGHT-BRINJAL","BRINJAL","DARK-MAROON","RED","OFF-WHITE","FUSCHIA","BROWN","MEHENDI-GREEN","GREEN","DARK-MUSTARD","YELLOW-GOLD","BLACK","TOMATO-PINK","LIGHT-PINK","PISTA-GREEN","LIME","FIROZI","MAROON","WHITE","LIGHT-BROWN","RAMA-GREEN","LIGHT-ORANGE","CREAM","LIGHT-YELLOW","LIGHT-GREEN","LIRIL","BOTTLE-GREEN","PASTEL-RED","LIGHT-GOLD","BRONZE","PASTEL-PINK","LILAC","DARK-GREY","HAZELWOOD","BLUSH-PINK","CORAL","SALMON","OCEAN-BLUE","LIGHT-SALMON"];
+var allowedSizes = ["26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60", "L", "XL", "XXL", "M", "S", "XS", "XXS", "XXXL", "4XL", "28", "FS", "14Y", "6Y", "8Y", "2Y", "4Y", "10Y", "12Y", "NA", "S/M", "L/XL","3-6M","6-12M","6-9M","9-12M","12-18M","18-24M","1-2Y","2-3Y","3-4Y","4-5Y","5-6Y","6-7Y","7-8Y","8-9Y","9-10Y","10-11Y","11-12Y","12-13Y","13-14Y"];
 var allowedStates = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir",
     "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Punjab", "Rajasthan", "Sikkim",
     "Tamil Nadu", "Tripura", "Uttaranchal", "Uttar Pradesh", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadar and Nagar Haveli", "Daman and Diu", "Delhi", "Lakshadeep", "Pondicherry"
@@ -276,6 +276,11 @@ function calculateTotal() {
             discount = parseFloat(retail * discount_rate / 100).toFixed(2);
             selling_rate = parseFloat(mrp) - parseFloat(discount);
             discount_amt = discount * quantity;
+        }if (type_client.toLowerCase() == "brandfactory") {
+            var retail = parseFloat($("#element-" + i + " .mrp").data("retail")).toFixed(2);
+            discount = parseFloat(retail * discount_rate / 100).toFixed(2);
+            selling_rate = parseFloat(mrp) - parseFloat(discount);
+            discount_amt = discount * quantity;
         }
 
         taxable_value = parseFloat(bill_amt - discount_amt);
@@ -514,7 +519,6 @@ function printBarcodesNoMRP() {
 }
 
 function printEAN() {
-
     if (qz) {
         var config = qz.configs.create("TSC TTP-247")
     } else {
@@ -669,16 +673,43 @@ function pBEAN(key, value, date_string) {
     var mrp = value['mrp'];
     var identifier = value['identifier'];
     var category = value['category'];
+    var sizeInCm = [];
+    
+    sizeInCm['32'] = "81cm";
+    sizeInCm['34'] = "86cm";
+    sizeInCm['36'] = "91cm";
+    sizeInCm['38'] = "96cm";
+    sizeInCm['40'] = "101cm";
+    sizeInCm['42'] = "106cm";
+    sizeInCm['44'] = "111cm";
+    sizeInCm['46'] = "116cm";
+    sizeInCm['48'] = "121cm";
+    sizeInCm['50'] = "126cm";
+    sizeInCm['52'] = "131cm";
+    
+    sizeInCm['M'] = "76cm";
+    sizeInCm['L'] = "81cm";
+    sizeInCm['XL'] = "86cm";
+    sizeInCm['XXL'] = "91cm";
+    sizeInCm['XXXL'] = "100cm";
+    sizeInCm['3XL'] = "106cm";
+    sizeInCm['4XL'] = "112cm";
+
+
     if (odd) {
         qz_array.push('B325,20,0,E30,2,2,70,B,"' + ean + '"\n');
-        qz_array.push('A325,125,0,3,1,1,N,"' + category + '"\n');
-        qz_array.push('A325,150,0,4,1,1,N,"' + design + '"\n');
-        qz_array.push('A325,182,0,3,1,1,N,"' + color + '"\n');
-        qz_array.push('A545,182,0,3,1,1,N,"' + size + '"\n');
-        qz_array.push('A325,205,0,3,1,1,N,"' + identifier + '"\n');
-        qz_array.push('A325,230,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
-        qz_array.push('A325,252,0,2,1,1,N,"(Inclu. of all taxes)"\n');
-        qz_array.push('A325,275,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+        qz_array.push('A325,110,0,2,1,1,N,"' + category + '"\n');
+        qz_array.push('A325,135,0,3,1,1,N,"' + design + '"\n');
+        qz_array.push('A325,160,0,2,1,1,N,"' + color + '"\n');
+        qz_array.push('A515,160,0,2,1,1,N,"' + size + '"\n');
+        
+        qz_array.push('A325,182,0,2,1,1,N,"' + identifier + '"\n');
+        qz_array.push('A515,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+        qz_array.push('A325,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
+        qz_array.push('A325,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
+        qz_array.push('A325,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+        qz_array.push('A325,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
+        qz_array.push('A325,295,0,1,1,1,N,"our cust.care executive at"\n');
         qz_array.push('\nP1,1\n');
         total_barcodes_printed++;
         total_print_documents++;
@@ -691,31 +722,45 @@ function pBEAN(key, value, date_string) {
             var set = Math.floor(quantity / 2);
             var remaining = quantity % 2;
             qz_array.push('\nN\n');
+            
             qz_array.push('B0,20,0,E30,2,2,70,B,"' + ean + '"\n');
             qz_array.push('B325,20,0,E30,2,2,70,B,"' + ean + '"\n');
-            qz_array.push('A0,125,0,3,1,1,N,"' + category + '"\n');
-            qz_array.push('A325,125,0,3,1,1,N,"' + category + '"\n');
+            
+            qz_array.push('A0,110,0,2,1,1,N,"' + category + '"\n');
+            qz_array.push('A325,110,0,2,1,1,N,"' + category + '"\n');
 
-            qz_array.push('A0,150,0,4,1,1,N,"' + design + '"\n');
-            qz_array.push('A325,150,0,4,1,1,N,"' + design + '"\n');
+            qz_array.push('A0,135,0,3,1,1,N,"' + design + '"\n');
+            qz_array.push('A325,135,0,3,1,1,N,"' + design + '"\n');
 
-            qz_array.push('A0,182,0,3,1,1,N,"' + color + '"\n');
-            qz_array.push('A325,182,0,3,1,1,N,"' + color + '"\n');
+            qz_array.push('A0,160,0,2,1,1,N,"' + color + '"\n');
+            qz_array.push('A325,160,0,2,1,1,N,"' + color + '"\n');
 
-            qz_array.push('A190,182,0,3,1,1,N,"' + size + '"\n');
-            qz_array.push('A545,182,0,3,1,1,N,"' + size + '"\n');
+            qz_array.push('A190,160,0,2,1,1,N,"' + size + '"\n');
+            qz_array.push('A515,160,0,2,1,1,N,"' + size + '"\n');
 
-            qz_array.push('A0,205,0,3,1,1,N,"' + identifier + '"\n');
-            qz_array.push('A325,205,0,3,1,1,N,"' + identifier + '"\n');
+            qz_array.push('A0,182,0,2,1,1,N,"' + identifier + '"\n');
+            qz_array.push('A325,182,0,2,1,1,N,"' + identifier + '"\n');
+            
+            qz_array.push('A190,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+            qz_array.push('A515,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
 
-            qz_array.push('A0,230,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
-            qz_array.push('A325,230,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
 
-            qz_array.push('A0,252,0,2,1,1,N,"(Inclu. of all taxes)"\n');
-            qz_array.push('A325,252,0,2,1,1,N,"(Inclu. of all taxes)"\n');
+            qz_array.push('A0,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
+            qz_array.push('A325,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
 
-            qz_array.push('A0,275,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
-            qz_array.push('A325,275,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+            qz_array.push('A0,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
+            qz_array.push('A325,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
+
+            qz_array.push('A0,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+            qz_array.push('A325,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+
+            qz_array.push('A0,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
+            qz_array.push('A325,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
+
+            qz_array.push('A0,295,0,1,1,1,N,"our cust.care executive at"\n');
+            qz_array.push('A325,295,0,1,1,1,N,"our cust.care executive at"\n');
+            
+
             qz_array.push('\nP' + set + ',1\n');
             total_barcodes_printed += set * 2;
             total_print_documents++;
@@ -725,15 +770,19 @@ function pBEAN(key, value, date_string) {
         if (remaining || Math.floor(quantity / 2) == 0) {
             qz_array.push('\nN\n');
             qz_array.push('B0,20,0,E30,2,2,70,B,"' + ean + '"\n');
-            qz_array.push('A0,125,0,3,1,1,N,"' + category + '"\n');
-            qz_array.push('A0,150,0,4,1,1,N,"' + design + '"\n');
-            qz_array.push('A0,182,0,3,1,1,N,"' + color + '"\n');
-            qz_array.push('A190,182,0,3,1,1,N,"' + size + '"\n');
-            qz_array.push('A0,205,0,3,1,1,N,"' + identifier + '"\n');
+            qz_array.push('A0,110,0,2,1,1,N,"' + category + '"\n');
+            qz_array.push('A0,135,0,3,1,1,N,"' + design + '"\n');
+            qz_array.push('A0,160,0,2,1,1,N,"' + color + '"\n');
+            qz_array.push('A190,160,0,2,1,1,N,"' + size + '"\n');
+            qz_array.push('A0,182,0,2,1,1,N,"' + identifier + '"\n');
+            qz_array.push('A190,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
 
-            qz_array.push('A0,230,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
-            qz_array.push('A0,252,0,2,1,1,N,"(Inclu. of all taxes)"\n');
-            qz_array.push('A0,275,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+
+            qz_array.push('A0,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
+            qz_array.push('A0,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
+            qz_array.push('A0,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+            qz_array.push('A0,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
+            qz_array.push('A0,295,0,1,1,1,N,"our cust.care executive at"\n');
 
 
             total_barcodes_printed++;
@@ -758,7 +807,7 @@ function pBNoMRP(key, value, date_string) {
         qz_array.push('B325,20,0,1A,2,2,70,B,"' + key + '"\n');
         qz_array.push('A325,125,0,3,1,1,N,"' + category + '"\n');
         qz_array.push('A325,150,0,4,1,1,N,"' + design + '"\n');
-        //qz_array.push('A325,150,0,3,1,1,N,"' + design + '_' + 'F00' + wsp + '00V' + '"\n');
+        //qz_array.push('A325,150,0,2,1,1,N,"' + design + '_' + 'F00' + wsp + '00V' + '"\n');
         qz_array.push('A325,182,0,3,1,1,N,"' + color + '"\n');
         qz_array.push('A545,182,0,3,1,1,N,"' + size + '"\n');
         qz_array.push('A325,205,0,3,1,1,N,"' + identifier + '"\n');
@@ -786,8 +835,8 @@ function pBNoMRP(key, value, date_string) {
             qz_array.push('A0,150,0,4,1,1,N,"' + design + '"\n');
             qz_array.push('A325,150,0,4,1,1,N,"' + design + '"\n');
 
-            //qz_array.push('A0,150,0,3,1,1,N,"' + design + '_' + 'F00' + wsp + '00V' + '"\n');
-            //qz_array.push('A325,150,0,3,1,1,N,"' + design + '_' + 'F00' + wsp + '00V' + '"\n');
+            //qz_array.push('A0,150,0,2,1,1,N,"' + design + '_' + 'F00' + wsp + '00V' + '"\n');
+            //qz_array.push('A325,150,0,2,1,1,N,"' + design + '_' + 'F00' + wsp + '00V' + '"\n');
 
             qz_array.push('A0,182,0,3,1,1,N,"' + color + '"\n');
             qz_array.push('A325,182,0,3,1,1,N,"' + color + '"\n');
@@ -817,7 +866,7 @@ function pBNoMRP(key, value, date_string) {
             qz_array.push('B0,20,0,1A,2,2,70,B,"' + key + '"\n');
             qz_array.push('A0,125,0,3,1,1,N,"' + category + '"\n');
             qz_array.push('A0,150,0,4,1,1,N,"' + design + '"\n');
-            //qz_array.push('A0,150,0,3,1,1,N,"' + design + '_' + 'F00' + wsp + '00V' + '"\n');
+            //qz_array.push('A0,150,0,2,1,1,N,"' + design + '_' + 'F00' + wsp + '00V' + '"\n');
             qz_array.push('A0,182,0,3,1,1,N,"' + color + '"\n');
             qz_array.push('A190,182,0,3,1,1,N,"' + size + '"\n');
             qz_array.push('A0,205,0,3,1,1,N,"' + identifier + '"\n');
