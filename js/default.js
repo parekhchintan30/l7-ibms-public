@@ -3,7 +3,7 @@ var total_print_documents = 0;
 var total_barcodes_printed = 0;
 var qz_array = [];
 var finished = true;
-var allowedColors = ["GOLD", "LIGHT-GOLD", "DARK-GOLD", "ROSE-GOLD", "COPPER", "RED", "LIGHT-RED", "MAROON", "DARK-MAROON", "GREEN", "BOTTLE-GREEN", "PISTA-GREEN", "MEHENDI-GREEN", "LIGHT-GREEN", "LIGHT-PINK", "PARROT-GREEN", "BLUE", "LIGHT-BLUE", "ROYAL-BLUE", "NAVY-BLUE", "LIRIL", "TOMATO-PINK", "PINK", "PINKISH-MAROON", "ORANGE", "PEACH", "MULTI", "GREY", "PURPLE", "BRINJAL", "WINE", "BLACK", "YELLOW", "MUSTARD", "PINK-MULTI", "RED-MULTI", "BLUE-MULTI", "GREEN-MULTI", "YELLOW-MULTI", "WHITE", "OFF-WHITE", "CREAM", "SILVER", "ANTIC-GOLD", "SKIN", "BROWN", "MAGENTA", "MAROON-MULTI", "BLACK-MULTI", "RAMA-GREEN", "PEACOCK-BLUE", "NEON-MULTI", "FIROZI", "YELLOW-GOLD", "SKY-BLUE", "LIGHT-ORANGE", "DARK-COPPER", "ONION-PINK", "TEAL", "BEIGE", "FUCHSIA", "DARK-PINK", "OLIVE-GREEN", "MINT-GREEN", "LIME-YELLOW", "PASTEL-BLUE", "LIME-GREEN", "PASTEL-GREEN", "DUSTY-BLUE", "DUSTY-PEACH", "DARK-GREEN", "DUSTY-GREEN", "S-PINK", "GERMAN-GREEN", "FIRE-BLUE", "DARK-GREY", "GERMAN-BLUE", "GOLD-MULTI","SILVER-MULTI","BLACK-MULTI","DARK-BRINJAL","T.BLUE","AQUA","Z.GREEN","RANI","LEMON","MUSTARD-GOLD","ORANGE","F.GREEN","N.MAGENTA","N.GOLD","R-PINK","DC-BLUE","SEA-GREEN","DARK-BLUE","DARK-PEACH","GAJARI","VIOLET","BLACK-GOLD","COBALT-BLUE","DARK-RED","BABY-PINK","ROSE-PINK","WOOD","LIGHT-GREY","RUST","BLACK-SILVER","COFFEE","MUSTARD","YELLOW","DARK-PISTA","PARROT-GREEN","TEAL","SKY-BLUE","DARK-GREEN","ROYAL-BLUE","NAVY-BLUE","INK-BLUE","LIGHT-BRINJAL","BRINJAL","DARK-MAROON","RED","OFF-WHITE","FUSCHIA","BROWN","MEHENDI-GREEN","GREEN","DARK-MUSTARD","YELLOW-GOLD","BLACK","TOMATO-PINK","LIGHT-PINK","PISTA-GREEN","LIME","FIROZI","MAROON","WHITE","LIGHT-BROWN","RAMA-GREEN","LIGHT-ORANGE","CREAM","LIGHT-YELLOW","LIGHT-GREEN","LIRIL","BOTTLE-GREEN","PASTEL-RED","LIGHT-GOLD","BRONZE","PASTEL-PINK","LILAC","DARK-GREY","HAZELWOOD","BLUSH-PINK","CORAL","SALMON","OCEAN-BLUE","LIGHT-SALMON"];
+var allowedColors = ["GOLD", "LIGHT-GOLD", "DARK-GOLD", "ROSE-GOLD", "COPPER", "RED", "LIGHT-RED", "MAROON", "DARK-MAROON", "GREEN", "BOTTLE-GREEN", "PISTA-GREEN", "MEHENDI-GREEN", "LIGHT-GREEN", "LIGHT-PINK", "PARROT-GREEN", "BLUE", "LIGHT-BLUE", "ROYAL-BLUE", "NAVY-BLUE", "LIRIL", "TOMATO-PINK", "PINK", "PINKISH-MAROON", "ORANGE", "PEACH", "MULTI", "GREY", "PURPLE", "BRINJAL", "WINE", "BLACK", "YELLOW", "MUSTARD", "PINK-MULTI", "RED-MULTI", "BLUE-MULTI", "GREEN-MULTI", "YELLOW-MULTI", "WHITE", "OFF-WHITE", "CREAM", "SILVER", "ANTIC-GOLD", "SKIN", "BROWN", "MAGENTA", "MAROON-MULTI", "BLACK-MULTI", "RAMA-GREEN", "PEACOCK-BLUE", "NEON-MULTI", "FIROZI", "YELLOW-GOLD", "SKY-BLUE", "LIGHT-ORANGE", "DARK-COPPER", "ONION-PINK", "TEAL", "BEIGE", "FUCHSIA", "DARK-PINK", "OLIVE-GREEN", "MINT-GREEN", "LIME-YELLOW", "PASTEL-BLUE", "LIME-GREEN", "PASTEL-GREEN", "DUSTY-BLUE", "DUSTY-PEACH", "DARK-GREEN", "DUSTY-GREEN", "S-PINK", "GERMAN-GREEN", "FIRE-BLUE", "DARK-GREY", "GERMAN-BLUE", "GOLD-MULTI","SILVER-MULTI","BLACK-MULTI","DARK-BRINJAL","T.BLUE","AQUA","Z.GREEN","RANI","LEMON","MUSTARD-GOLD","ORANGE","F.GREEN","N.MAGENTA","N.GOLD","R-PINK","DC-BLUE","SEA-GREEN","DARK-BLUE","DARK-PEACH","GAJARI","VIOLET","BLACK-GOLD","BLACK-WHITE","COBALT-BLUE","DARK-RED","BABY-PINK","ROSE-PINK","WOOD","LIGHT-GREY","RUST","BLACK-SILVER","COFFEE","MUSTARD","YELLOW","DARK-PISTA","PARROT-GREEN","TEAL","SKY-BLUE","DARK-GREEN","ROYAL-BLUE","NAVY-BLUE","INK-BLUE","LIGHT-BRINJAL","BRINJAL","DARK-MAROON","RED","OFF-WHITE","FUSCHIA","BROWN","MEHENDI-GREEN","GREEN","DARK-MUSTARD","YELLOW-GOLD","BLACK","TOMATO-PINK","LIGHT-PINK","PISTA-GREEN","LIME","FIROZI","MAROON","WHITE","LIGHT-BROWN","RAMA-GREEN","LIGHT-ORANGE","CREAM","LIGHT-YELLOW","LIGHT-GREEN","LIRIL","BOTTLE-GREEN","PASTEL-RED","LIGHT-GOLD","BRONZE","PASTEL-PINK","LILAC","DARK-GREY","HAZELWOOD","BLUSH-PINK","CORAL","SALMON","OCEAN-BLUE","ICE-BLUE","LIGHT-SALMON"];
 var allowedSizes = ["26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60", "L", "XL", "XXL", "M", "S", "XS", "XXS", "XXXL", "4XL", "28", "FS", "14Y", "6Y", "8Y", "2Y", "4Y", "10Y", "12Y", "NA", "S/M", "L/XL","3-6M","6-12M","6-9M","9-12M","12-18M","18-24M","1-2Y","2-3Y","3-4Y","4-5Y","5-6Y","6-7Y","7-8Y","8-9Y","9-10Y","10-11Y","11-12Y","12-13Y","13-14Y"];
 var allowedStates = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir",
     "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Punjab", "Rajasthan", "Sikkim",
@@ -578,7 +578,67 @@ function printEAN() {
     //   monitorPrinting(qz);
 }
 
+function printEANNoMRP() {
 
+    if (qz) {
+        var config = qz.configs.create("TSC TTP-247")
+    } else {
+        qz = document.getElementById('qz');
+        config = qz.configs.create("TSC TTP-247")
+    }
+
+    var date = new Date();
+    var date_string = date.getDate() + "." + parseInt(parseInt(date.getMonth()) + 1) + "." + date.getFullYear();
+    var totalBarcodes = 0;
+    var subTotal = 0;
+    var print = print_array;
+    qz_array.push("N\n");
+    qz_array.push("q550\n");
+    qz_array.push("Q303,26\n");
+    qz_array.push('TDdd me y4\n');
+    var c = 0;
+    $.each(print, function(key, value) {
+        pENoMRP(key, value, date_string);
+        c++;
+    });
+    if (odd) {
+        //alert("Inside odd");  
+        qz_array.push('\nP1,1\n');
+        c++;
+        odd = 0;
+        // qz_array.push('END');
+        total_print_documents++;
+        // alert("appending odd");
+    } else {
+        //  alert("not appending");
+    }
+    // Mark the end of a label, in this case  P1 plus a newline character
+    // qz-printknows to look for this and treat this as the end of a "page"
+    // for better control of larger spooled jobs (i.e. 50+ labels)
+    //qz.setEndOfDocument(",1\n");
+
+    // The amount of labels to spool to the printer at a time. When
+    // qz-print counts this many `EndOfDocument`'s, a new print job will 
+    // automatically be spooled to the printer and counting will start
+    // over.
+    //qz.setDocumentsPerSpool("10");
+    //alert("Printing: "+c);  
+    //alert("Total Documents: "+total_print_documents);
+    //alert("Total Barcodes: "+total_barcodes_printed);
+
+    var r = confirm("Are you sure you want to print " + total_barcodes_printed + " barcodes");
+    if (r == true) {
+        qz.print(config, qz_array).catch(function(e) {
+            console.error(e);
+        });
+    }
+
+    total_print_documents = 0;
+    total_barcodes_printed = 0;
+
+    //   monitorPrinting(qz);
+}
+        
 
 function pB(key, value, date_string) {
     var quantity = value['quantity'];
@@ -780,6 +840,135 @@ function pBEAN(key, value, date_string) {
 
             qz_array.push('A0,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
             qz_array.push('A0,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
+            qz_array.push('A0,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+            qz_array.push('A0,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
+            qz_array.push('A0,295,0,1,1,1,N,"our cust.care executive at"\n');
+
+
+            total_barcodes_printed++;
+            odd = 1;
+            remaining = 0;
+        }
+    }
+
+}
+
+function pENoMRP(key, value, date_string) {
+    var ean = value['ean'];
+    var quantity = value['quantity'];
+    var design = value['design'];
+    var color = value['color'];
+    var size = value['size'];
+    var mrp = value['mrp'];
+    var identifier = value['identifier'];
+    var category = value['category'];
+    var sizeInCm = [];
+    
+    sizeInCm['32'] = "81cm";
+    sizeInCm['34'] = "86cm";
+    sizeInCm['36'] = "91cm";
+    sizeInCm['38'] = "96cm";
+    sizeInCm['40'] = "101cm";
+    sizeInCm['42'] = "106cm";
+    sizeInCm['44'] = "111cm";
+    sizeInCm['46'] = "116cm";
+    sizeInCm['48'] = "121cm";
+    sizeInCm['50'] = "126cm";
+    sizeInCm['52'] = "131cm";
+    
+    sizeInCm['M'] = "76cm";
+    sizeInCm['L'] = "81cm";
+    sizeInCm['XL'] = "86cm";
+    sizeInCm['XXL'] = "91cm";
+    sizeInCm['XXXL'] = "100cm";
+    sizeInCm['3XL'] = "106cm";
+    sizeInCm['4XL'] = "112cm";
+
+
+    if (odd) {
+        qz_array.push('B325,20,0,E30,2,2,70,B,"' + ean + '"\n');
+        qz_array.push('A325,110,0,2,1,1,N,"' + category + '"\n');
+        qz_array.push('A325,135,0,3,1,1,N,"' + design + '"\n');
+        qz_array.push('A325,160,0,2,1,1,N,"' + color + '"\n');
+        qz_array.push('A515,160,0,2,1,1,N,"' + size + '"\n');
+        
+        qz_array.push('A325,182,0,2,1,1,N,"' + identifier + '"\n');
+        qz_array.push('A515,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+        //qz_array.push('A325,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
+        //qz_array.push('A325,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
+        qz_array.push('A325,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+        qz_array.push('A325,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
+        qz_array.push('A325,295,0,1,1,1,N,"our cust.care executive at"\n');
+        qz_array.push('\nP1,1\n');
+        total_barcodes_printed++;
+        total_print_documents++;
+        odd = 0;
+        quantity--;
+    }
+    if (quantity > 0) {
+        var v = Math.floor(quantity / 2);
+        if (quantity % 2 == 0 || Math.floor(quantity / 2) > 0) {
+            var set = Math.floor(quantity / 2);
+            var remaining = quantity % 2;
+            qz_array.push('\nN\n');
+            
+            qz_array.push('B0,20,0,E30,2,2,70,B,"' + ean + '"\n');
+            qz_array.push('B325,20,0,E30,2,2,70,B,"' + ean + '"\n');
+            
+            qz_array.push('A0,110,0,2,1,1,N,"' + category + '"\n');
+            qz_array.push('A325,110,0,2,1,1,N,"' + category + '"\n');
+
+            qz_array.push('A0,135,0,3,1,1,N,"' + design + '"\n');
+            qz_array.push('A325,135,0,3,1,1,N,"' + design + '"\n');
+
+            qz_array.push('A0,160,0,2,1,1,N,"' + color + '"\n');
+            qz_array.push('A325,160,0,2,1,1,N,"' + color + '"\n');
+
+            qz_array.push('A190,160,0,2,1,1,N,"' + size + '"\n');
+            qz_array.push('A515,160,0,2,1,1,N,"' + size + '"\n');
+
+            qz_array.push('A0,182,0,2,1,1,N,"' + identifier + '"\n');
+            qz_array.push('A325,182,0,2,1,1,N,"' + identifier + '"\n');
+            
+            qz_array.push('A190,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+            qz_array.push('A515,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+
+
+            //qz_array.push('A0,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
+            //qz_array.push('A325,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
+
+            //qz_array.push('A0,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
+            //qz_array.push('A325,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
+
+            qz_array.push('A0,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+            qz_array.push('A325,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+
+            qz_array.push('A0,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
+            qz_array.push('A325,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
+
+            qz_array.push('A0,295,0,1,1,1,N,"our cust.care executive at"\n');
+            qz_array.push('A325,295,0,1,1,1,N,"our cust.care executive at"\n');
+            
+
+            qz_array.push('\nP' + set + ',1\n');
+            total_barcodes_printed += set * 2;
+            total_print_documents++;
+        }
+
+
+        if (remaining || Math.floor(quantity / 2) == 0) {
+            qz_array.push('\nN\n');
+            qz_array.push('B0,20,0,E30,2,2,70,B,"' + ean + '"\n');
+            qz_array.push('A0,110,0,2,1,1,N,"' + category + '"\n');
+            qz_array.push('A0,135,0,3,1,1,N,"' + design + '"\n');
+            qz_array.push('A0,160,0,2,1,1,N,"' + color + '"\n');
+            qz_array.push('A190,160,0,2,1,1,N,"' + size + '"\n');
+            qz_array.push('A0,182,0,2,1,1,N,"' + identifier + '"\n');
+            qz_array.push('A190,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+
+
+            //qz_array.push('A0,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
+            //qz_array.push('A0,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
             qz_array.push('A0,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
             qz_array.push('A0,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
             qz_array.push('A0,295,0,1,1,1,N,"our cust.care executive at"\n');
