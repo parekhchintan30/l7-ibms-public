@@ -3,7 +3,7 @@ var total_print_documents = 0;
 var total_barcodes_printed = 0;
 var qz_array = [];
 var finished = true;
-var allowedColors = ["GOLD", "LIGHT-GOLD", "DARK-GOLD", "ROSE-GOLD", "COPPER", "RED", "LIGHT-RED", "MAROON", "DARK-MAROON", "GREEN", "BOTTLE-GREEN", "PISTA-GREEN", "MEHENDI-GREEN", "LIGHT-GREEN", "LIGHT-PINK", "PARROT-GREEN", "BLUE", "LIGHT-BLUE", "ROYAL-BLUE", "NAVY-BLUE", "LIRIL", "TOMATO-PINK", "PINK", "PINKISH-MAROON", "ORANGE", "PEACH", "MULTI", "GREY", "PURPLE", "BRINJAL", "WINE", "BLACK", "YELLOW", "MUSTARD", "PINK-MULTI", "RED-MULTI", "BLUE-MULTI", "GREEN-MULTI", "YELLOW-MULTI", "WHITE", "OFF-WHITE", "CREAM", "SILVER", "ANTIC-GOLD", "SKIN", "BROWN", "MAGENTA", "MAROON-MULTI", "BLACK-MULTI", "RAMA-GREEN", "LAVENDER","PEACOCK-BLUE", "NEON-MULTI", "FIROZI", "YELLOW-GOLD", "SKY-BLUE", "LIGHT-ORANGE", "DARK-COPPER", "ONION-PINK", "TEAL", "BEIGE", "FUCHSIA", "DARK-PINK", "OLIVE-GREEN", "MINT-GREEN", "LIME-YELLOW", "PASTEL-BLUE", "LIME-GREEN", "PASTEL-GREEN", "DUSTY-BLUE", "DUSTY-PEACH", "DARK-GREEN", "DUSTY-GREEN", "S-PINK", "GERMAN-GREEN", "FIRE-BLUE", "DARK-GREY", "GERMAN-BLUE", "GOLD-MULTI","SILVER-MULTI","BLACK-MULTI","DARK-BRINJAL","T.BLUE","AQUA","Z.GREEN","RANI","LEMON","MUSTARD-GOLD","ORANGE","F.GREEN","N.MAGENTA","N.GOLD","R-PINK","DC-BLUE","SEA-GREEN","DARK-BLUE","DARK-PEACH","GAJARI","VIOLET","BLACK-GOLD","BLACK-WHITE","COBALT-BLUE","DARK-RED","BABY-PINK","ROSE-PINK","WOOD","LIGHT-GREY","RUST","BLACK-SILVER","COFFEE","MUSTARD","YELLOW","DARK-PISTA","PARROT-GREEN","TEAL","SKY-BLUE","DARK-GREEN","ROYAL-BLUE","NAVY-BLUE","INK-BLUE","LIGHT-BRINJAL","BRINJAL","DARK-MAROON","RED","OFF-WHITE","FUSCHIA","BROWN","MEHENDI-GREEN","GREEN","DARK-MUSTARD","YELLOW-GOLD","BLACK","TOMATO-PINK","LIGHT-PINK","PISTA-GREEN","LIME","FIROZI","MAROON","WHITE","LIGHT-BROWN","RAMA-GREEN","LIGHT-ORANGE","CREAM","LIGHT-YELLOW","LIGHT-GREEN","LIRIL","BOTTLE-GREEN","PASTEL-RED","LIGHT-GOLD","BRONZE","PASTEL-PINK","LILAC","DARK-GREY","HAZELWOOD","BLUSH-PINK","CORAL","SALMON","OCEAN-BLUE","ICE-BLUE","LIGHT-SALMON","LIGHT-KHAKI","NEON-GREEN","CHARCOAL","MANGO-YELLOW","FERN-GREEN","DUSTY-GREEN","JADE-GREEN","PALE-YELLOW","MIDNIGHT-GREY","ICE-GREY","ASH-GREY","POWDER-PEACH","CARROT","BURGANDY","IVORY"];
+var allowedColors = ["GOLD", "LIGHT-GOLD", "DARK-GOLD", "ROSE-GOLD", "COPPER", "RED", "LIGHT-RED", "MAROON", "DARK-MAROON", "GREEN", "BOTTLE-GREEN", "PISTA-GREEN", "MEHENDI-GREEN", "LIGHT-GREEN", "LIGHT-PINK", "PARROT-GREEN", "BLUE", "LIGHT-BLUE", "ROYAL-BLUE", "NAVY-BLUE", "LIRIL", "TOMATO-PINK", "PINK", "PINKISH-MAROON", "ORANGE", "PEACH", "MULTI", "GREY", "PURPLE", "BRINJAL", "WINE", "BLACK", "YELLOW", "MUSTARD", "PINK-MULTI", "RED-MULTI", "BLUE-MULTI", "GREEN-MULTI", "YELLOW-MULTI", "WHITE", "OFF-WHITE", "CREAM", "SILVER", "ANTIC-GOLD", "SKIN", "BROWN", "MAGENTA", "MAROON-MULTI", "BLACK-MULTI", "RAMA-GREEN", "LAVENDER","PEACOCK-BLUE", "NEON-MULTI", "FIROZI", "YELLOW-GOLD", "SKY-BLUE", "LIGHT-ORANGE", "HOT-PINK","CORAL-PINK","DARK-COPPER", "ONION-PINK", "TEAL", "BEIGE", "FUCHSIA", "DARK-PINK", "OLIVE-GREEN", "MINT-GREEN", "LIME-YELLOW", "PASTEL-BLUE", "LIME-GREEN", "PASTEL-GREEN", "DUSTY-BLUE", "DUSTY-PEACH", "DARK-GREEN", "DUSTY-GREEN", "S-PINK", "GERMAN-GREEN", "FIRE-BLUE", "DARK-GREY", "GERMAN-BLUE", "GOLD-MULTI","SILVER-MULTI","BLACK-MULTI","DARK-BRINJAL","T.BLUE","AQUA","Z.GREEN","RANI","LEMON","MUSTARD-GOLD","ORANGE","F.GREEN","N.MAGENTA","N.GOLD","R-PINK","DC-BLUE","SEA-GREEN","DARK-BLUE","DARK-PEACH","GAJARI","VIOLET","BLACK-GOLD","BLACK-WHITE","COBALT-BLUE","DARK-RED","BABY-PINK","ROSE-PINK","WOOD","LIGHT-GREY","RUST","BLACK-SILVER","COFFEE","MUSTARD","YELLOW","DARK-PISTA","PARROT-GREEN","TEAL","SKY-BLUE","DARK-GREEN","ROYAL-BLUE","NAVY-BLUE","INK-BLUE","LIGHT-BRINJAL","BRINJAL","DARK-MAROON","RED","OFF-WHITE","FUSCHIA","BROWN","MEHENDI-GREEN","GREEN","DARK-MUSTARD","YELLOW-GOLD","BLACK","TOMATO-PINK","LIGHT-PINK","PISTA-GREEN","LIME","FIROZI","MAROON","WHITE","LIGHT-BROWN","RAMA-GREEN","LIGHT-ORANGE","CREAM","LIGHT-YELLOW","LIGHT-GREEN","LIRIL","BOTTLE-GREEN","PASTEL-RED","LIGHT-GOLD","BRONZE","PASTEL-PINK","LILAC","DARK-GREY","HAZELWOOD","BLUSH-PINK","CORAL","SALMON","OCEAN-BLUE","ICE-BLUE","LIGHT-SALMON","LIGHT-KHAKI","NEON-GREEN","CHARCOAL","MANGO-YELLOW","FERN-GREEN","DUSTY-GREEN","JADE-GREEN","PALE-YELLOW","MIDNIGHT-GREY","ICE-GREY","ASH-GREY","POWDER-PEACH","CARROT","BURGANDY","IVORY"];
 var allowedSizes = ["26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60", "L", "XL", "XXL", "M", "S", "XS", "XXS", "XXXL", "4XL", "28", "FS", "14Y", "6Y", "8Y", "2Y", "4Y", "10Y", "12Y", "NA", "S/M", "L/XL","3-6M","6-12M","6-9M","9-12M","12-18M","18-24M","1-2Y","2-3Y","3-4Y","4-5Y","5-6Y","6-7Y","7-8Y","8-9Y","9-10Y","10-11Y","10-12Y","12-14Y","11-12Y","12-13Y","13-14Y","NB"];
 var allowedStates = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir",
     "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Punjab", "Rajasthan", "Sikkim",
@@ -578,6 +578,193 @@ function printEAN() {
     //   monitorPrinting(qz);
 }
 
+
+function printEAN_New() {
+
+    if (qz) {
+        var config = qz.configs.create("TSC TTP-247")
+    } else {
+        qz = document.getElementById('qz');
+        config = qz.configs.create("TSC TTP-247")
+    }
+
+    var date = new Date();
+    var date_string = parseInt(parseInt(date.getMonth()) + 1) + "/" + date.getFullYear();
+    var totalBarcodes = 0;
+    var subTotal = 0;
+    var print = print_array;
+    qz_array.push("N\n");
+    qz_array.push("q359\n");
+    qz_array.push("Q609,26\n");
+    qz_array.push('TDdd me y4\n');
+    var c = 0;
+    $.each(print, function(key, value) {
+        pEAN_New(key, value, date_string);
+        c++;
+    });
+    if (odd) {
+        //alert("Inside odd");  
+        qz_array.push('\nP1,1\n');
+        c++;
+        odd = 0;
+        // qz_array.push('END');
+        total_print_documents++;
+        // alert("appending odd");
+    } else {
+        //  alert("not appending");
+    }
+    // Mark the end of a label, in this case  P1 plus a newline character
+    // qz-printknows to look for this and treat this as the end of a "page"
+    // for better control of larger spooled jobs (i.e. 50+ labels)
+    //qz.setEndOfDocument(",1\n");
+
+    // The amount of labels to spool to the printer at a time. When
+    // qz-print counts this many `EndOfDocument`'s, a new print job will 
+    // automatically be spooled to the printer and counting will start
+    // over.
+    //qz.setDocumentsPerSpool("10");
+    //alert("Printing: "+c);  
+    //alert("Total Documents: "+total_print_documents);
+    //alert("Total Barcodes: "+total_barcodes_printed);
+
+    var r = confirm("Are you sure you want to print " + total_barcodes_printed + " barcodes");
+    if (r == true) {
+        qz.print(config, qz_array).catch(function(e) {
+            console.error(e);
+        });
+    }
+
+    total_print_documents = 0;
+    total_barcodes_printed = 0;
+
+    //   monitorPrinting(qz);
+}
+
+
+function pEAN_New(key, value, date_string) {
+    var ean = value['ean'];
+    var quantity = value['quantity'];
+    var design = value['design'];
+    var color = value['color'];
+    var size = value['size'];
+    var mrp = value['mrp'];
+    var identifier = value['identifier'];
+    var category = value['category'];
+    
+
+
+
+
+        while(quantity>0){
+        qz_array.push('\nN\n');
+        qz_array.push('B10,20,0,E30,3,2,70,B,"' + ean + '"\n');
+        qz_array.push('A20,115,0,2,1,1,N,"' + category + '"\n');
+        qz_array.push('A20,140,0,3,1,1,N,"' + design + '"\n');
+        qz_array.push('A20,165,0,2,1,1,N,"' + color + '"\n');
+        qz_array.push('A260,165,0,2,1,1,N,"' + size + '"\n');
+        qz_array.push('A20,187,0,2,1,1,N,"' + identifier + '"\n');
+        qz_array.push('A260,187,0,2,1,1,N,"' + getSizeInCM(size) + '"\n');
+        
+        qz_array.push('A20,212,0,2,1,1,N,"Net Qty:1N"\n');
+        qz_array.push('A180,212,0,2,1,1,N,"Pkd.On:' + date_string + '"\n');
+        
+
+        qz_array.push('LO10,236,330,5 \n');
+        
+        qz_array.push('A20,250,0,3,1,1,N,"  M.R.P. Rs. ' + mrp + '"\n');
+        qz_array.push('A20,272,0,1,1,1,N,"     (Inclu. of all taxes)"\n');
+        
+        qz_array.push('LO10,289,330,5 \n');
+        
+        qz_array.push('A20,301,0,3,1,1,N,"   Manufactured By: "\n');
+        qz_array.push('A20,326,0,2,1,1,N,"Vamas Fashion Private Ltd."\n');
+        qz_array.push('A20,351,0,2,1,1,N,"Shop 22, C-Wing, Neelkanth"\n');
+        qz_array.push('A20,376,0,2,1,1,N,"Business Park, Kirol Road,"\n');
+        qz_array.push('A20,401,0,2,1,1,N,"Vidyaivhar(W),Village:Kirol,"\n');
+        qz_array.push('A20,426,0,2,1,1,N,"Taluka:Kurla,District:Mumbai, "\n');
+        qz_array.push('A20,451,0,2,1,1,N,"India,Maharashtra,PIN:400086."\n');
+        qz_array.push('LO10,476,330,5 \n');
+        qz_array.push('A20,486,0,2,1,1,N,"For complaints/feedback,pls"\n');
+        qz_array.push('A20,511,0,2,1,1,N,"write to our customer care"\n');
+        qz_array.push('A20,536,0,2,1,1,N," at above address or email"\n');
+        qz_array.push('A20,561,0,3,1,1,N,"   support@vamas.in"\n');
+        qz_array.push('A20,590,0,3,1,1,N,"     022-25020792 "\n');
+        qz_array.push('\nP1,1\n');
+        total_barcodes_printed++;
+        quantity--;
+        }
+
+
+}
+
+
+function sizeInCM(size){
+    var sizeInCm = [];
+    sizeInCm['26'] = "66cm";
+    sizeInCm['28'] = "71cm";
+    sizeInCm['30'] = "76cm";
+    sizeInCm['32'] = "81cm";
+    sizeInCm['34'] = "86cm";
+    sizeInCm['36'] = "91cm";
+    sizeInCm['38'] = "96cm";
+    sizeInCm['40'] = "101cm";
+    sizeInCm['42'] = "106cm";
+    sizeInCm['44'] = "111cm";
+    sizeInCm['46'] = "116cm";
+    sizeInCm['48'] = "121cm";
+    sizeInCm['50'] = "126cm";
+    sizeInCm['52'] = "131cm";
+    sizeInCm['54'] = "136cm";
+    sizeInCm['56'] = "141cm";
+    sizeInCm['58'] = "146cm";
+    sizeInCm['60'] = "151cm";
+    
+
+    sizeInCm['XXS'] = "76cm";
+    sizeInCm['XS'] = "81cm";
+    sizeInCm['S'] = "86cm";
+    sizeInCm['M'] = "91cm";
+    sizeInCm['L'] = "96cm";
+    sizeInCm['XL'] = "101cm";
+    sizeInCm['XXL'] = "106cm";
+    sizeInCm['XXXL'] = "111cm";
+    sizeInCm['3XL'] = "111cm";
+    sizeInCm['4XL'] = "116cm";
+
+
+    sizeInCm['3-6M'] = "Dim:27cm";
+    sizeInCm['6-12M'] = "Dim:27cm";
+    sizeInCm['6-9M'] = "Dim:27cm";
+    sizeInCm['9-12M'] = "Dim:27cm";
+    sizeInCm['12-18M'] = "Dim:27cm";
+    sizeInCm['18-24M'] = "Dim:27cm";
+    sizeInCm['1-2Y'] = "Dim:27cm";
+    sizeInCm['2-3Y'] = "Dim:27cm";
+    sizeInCm['3-4Y'] = "Dim:27cm";
+    sizeInCm['4-5Y'] = "Dim:27cm";
+    sizeInCm['5-6Y'] = "Dim:27cm";
+    sizeInCm['6-7Y'] = "Dim:27cm";
+    sizeInCm['7-8Y'] = "Dim:27cm";
+    sizeInCm['8-9Y'] = "Dim:27cm";
+    sizeInCm['9-10Y'] = "Dim:27cm";
+    sizeInCm['10-11Y'] = "Dim:27cm";
+    sizeInCm['10-12Y'] = "Dim:27cm";
+    sizeInCm['12-14Y'] = "Dim:27cm";
+    sizeInCm['11-12Y'] = "Dim:27cm";
+    sizeInCm['12-13Y'] = "Dim:27cm";
+    sizeInCm['13-14Y'] = "Dim:27cm";
+    sizeInCm['NB'] = "Dim:27cm";
+
+    sizeInCm['FS'] = "96cm";
+
+
+    if(sizeInCm[size])
+        return sizeInCm[size];
+    else
+        return "CM: NA";
+
+}
+
 function printEANNoMRP() {
 
     if (qz) {
@@ -981,6 +1168,135 @@ function pENoMRP(key, value, date_string) {
     }
 
 }
+
+
+
+
+
+function printEANBig() {
+    if (qz) {
+        var config = qz.configs.create("TSC TTP-247")
+    } else {
+        qz = document.getElementById('qz');
+        config = qz.configs.create("TSC TTP-247")
+    }
+
+    var date = new Date();
+    var date_string = date.getDate() + "." + parseInt(parseInt(date.getMonth()) + 1) + "." + date.getFullYear();
+    var totalBarcodes = 0;
+    var subTotal = 0;
+    var print = print_array;
+    qz_array.push("N\n");
+    qz_array.push("q550\n");
+    qz_array.push("Q680,26\n");
+    qz_array.push('TDdd me y4\n');
+    var c = 0;
+    $.each(print, function(key, value) {
+        pBEANBig(key, value, date_string);
+        c++;
+    });
+    if (odd) {
+        //alert("Inside odd");  
+        qz_array.push('\nP1,1\n');
+        c++;
+        odd = 0;
+        // qz_array.push('END');
+        total_print_documents++;
+        // alert("appending odd");
+    } else {
+        //  alert("not appending");
+    }
+    // Mark the end of a label, in this case  P1 plus a newline character
+    // qz-printknows to look for this and treat this as the end of a "page"
+    // for better control of larger spooled jobs (i.e. 50+ labels)
+    //qz.setEndOfDocument(",1\n");
+
+    // The amount of labels to spool to the printer at a time. When
+    // qz-print counts this many `EndOfDocument`'s, a new print job will 
+    // automatically be spooled to the printer and counting will start
+    // over.
+    //qz.setDocumentsPerSpool("10");
+    //alert("Printing: "+c);  
+    //alert("Total Documents: "+total_print_documents);
+    //alert("Total Barcodes: "+total_barcodes_printed);
+
+    var r = confirm("Are you sure you want to print " + total_barcodes_printed + " barcodes");
+    if (r == true) {
+        qz.print(config, qz_array).catch(function(e) {
+            console.error(e);
+        });
+    }
+
+    total_print_documents = 0;
+    total_barcodes_printed = 0;
+
+    //   monitorPrinting(qz);
+}
+
+function pBEANBig(key, value, date_string) {
+   
+    var ean = value['ean'];
+    var quantity = value['quantity'];
+    var design = value['design'];
+    var color = value['color'];
+    var size = value['size'];
+    var mrp = value['mrp'];
+    var identifier = value['identifier'];
+    var category = value['category'];
+    var sizeInCm = [];
+    
+    sizeInCm['32'] = "81cm";
+    sizeInCm['34'] = "86cm";
+    sizeInCm['36'] = "91cm";
+    sizeInCm['38'] = "96cm";
+    sizeInCm['40'] = "101cm";
+    sizeInCm['42'] = "106cm";
+    sizeInCm['44'] = "111cm";
+    sizeInCm['46'] = "116cm";
+    sizeInCm['48'] = "121cm";
+    sizeInCm['50'] = "126cm";
+    sizeInCm['52'] = "131cm";
+    
+    sizeInCm['M'] = "76cm";
+    sizeInCm['L'] = "81cm";
+    sizeInCm['XL'] = "86cm";
+    sizeInCm['XXL'] = "91cm";
+    sizeInCm['XXXL'] = "100cm";
+    sizeInCm['3XL'] = "106cm";
+    sizeInCm['4XL'] = "112cm";
+
+    qz_array.push('\nN\n');
+    qz_array.push('B3,20,0,E30,2,2,70,B,"' + ean + '"\n');
+    qz_array.push('A-20,110,0,2,1,1,N,"' + category + '"\n');
+    qz_array.push('A-20,135,0,3,1,1,N,"' + design + '"\n');
+    qz_array.push('A-20,160,0,2,1,1,N,"' + color + '"\n');
+    qz_array.push('A190,160,0,2,1,1,N,"' + size + '"\n');
+    qz_array.push('A-20,182,0,2,1,1,N,"' + identifier + '"\n');
+    qz_array.push('A190,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+    qz_array.push('A-20,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
+    qz_array.push('A-20,229,0,1,1,1,N,"  (Inclu. of all taxes)"\n');
+    qz_array.push('A-20,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
+    qz_array.push('LO-20,267,280,3 \n');
+    qz_array.push('A-20,275,0,3,1,1,N,"Manufactured By: "\n');
+    qz_array.push('A-20,300,0,2,1,1,N,"Vamas Fashion Pvt. Ltd."\n');
+    qz_array.push('A-20,325,0,2,1,1,N,"Shop 22, C Wing,"\n');
+    qz_array.push('A-20,350,0,2,1,1,N,"Neelkanth Business Park,"\n');
+    qz_array.push('A-20,375,0,2,1,1,N,"Kirol Road,Vidyaivhar(W)"\n');
+    qz_array.push('A-20,400,0,2,1,1,N,"Vill:Kirol,Taluka:Kurla"\n');
+    qz_array.push('A-20,425,0,2,1,1,N,"Dist:Mumbai, Maharashtra"\n');
+    qz_array.push('A-20,450,0,2,1,1,N,"PIN:400086"\n');
+    qz_array.push('LO-20,475,280,3 \n');
+    qz_array.push('A-20,485,0,2,1,1,N,"For customer complaints"\n');
+    qz_array.push('A-20,510,0,2,1,1,N,"please contact our"\n');
+    qz_array.push('A-20,535,0,2,1,1,N,"customer care executive"\n');
+    qz_array.push('A-20,560,0,3,1,1,N,"  support@vamas.in"\n');
+    qz_array.push('A-20,590,0,2,1,1,N,"      OR CALL ON"\n');
+    qz_array.push('A-20,620,0,3,1,1,N,"    022-25020792"\n');
+    
+    }
+
+
+
 
 function pENoMRPFV(key, value, date_string) {
     var ean = value['ean'];
