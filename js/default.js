@@ -698,7 +698,7 @@ function pEAN_New(key, value, date_string) {
 }
 
 
-function sizeInCM(size){
+function getSizeInCM(size){
     var sizeInCm = [];
     sizeInCm['26'] = "66cm";
     sizeInCm['28'] = "71cm";
