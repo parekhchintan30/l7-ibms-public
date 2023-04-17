@@ -248,20 +248,16 @@ function calculateTotal() {
     var against_h_form = $("#against_h_form").val();
     var transport_charges = $("#transport_charge").val();
 
-    var cgst_2_5 = 0;
-    var sgst_2_5 = 0;
-    var cgst_6 = 0;
-    var sgst_6 = 0;
-    var igst_5 = 0;
-    var igst_12 = 0;
-    var cgst_0_05 = 0;
-    var igst_0_1 = 0;
-
+    var gst_1 = 0;
+    var gst_5 = 0;
+    var gst_12 = 0;
+    var gst_18 = 0;
+   
     var round_up = 0;
-
-
-
+    
+    
     while (barcode != "" && barcode != null) {
+        var gst_rate = parseInt($("#element-" + i + " .gst_rate").text());
         mrp = parseFloat($("#element-" + i + " .mrp").data("val")).toFixed(2);
         quantity = parseFloat($("#element-" + i + " .quantity").val()).toFixed(2);
         bill_amt = mrp * quantity;
@@ -271,55 +267,39 @@ function calculateTotal() {
         var selling_rate = parseFloat(mrp) - parseFloat(discount);
         if (discount < 1)
             discount_rate = parseFloat(0).toFixed(2);
-        if (type_client.toLowerCase() == "ethnicity") {
-            var retail = parseFloat($("#element-" + i + " .mrp").data("retail")).toFixed(2);
-            discount = parseFloat(retail * discount_rate / 100).toFixed(2);
-            selling_rate = parseFloat(mrp) - parseFloat(discount);
-            discount_amt = discount * quantity;
-        }if (type_client.toLowerCase() == "brandfactory") {
+        if (type_client.toLowerCase() == "ethnicity" || type_client.toLowerCase() == "reliance") {
             var retail = parseFloat($("#element-" + i + " .mrp").data("retail")).toFixed(2);
             discount = parseFloat(retail * discount_rate / 100).toFixed(2);
             selling_rate = parseFloat(mrp) - parseFloat(discount);
             discount_amt = discount * quantity;
         }
-
         taxable_value = parseFloat(bill_amt - discount_amt);
         //alert(taxable_value); alert(selling_rate);
-        if (gst_type == "S") {
-
+        
             if (against_h_form == 1) {
                 gst_rate = parseFloat(0.1).toFixed(2);
-                cgst_0_05 += taxable_value;
+                gst_1 += taxable_value;
             } else {
-
-                if (selling_rate <= 1000) {
-                    gst_rate = parseFloat(5).toFixed(2);
-                    cgst_2_5 += taxable_value;
-                } else {
-                    gst_rate = parseFloat(12).toFixed(2);
-                    cgst_6 += taxable_value;
+                if(gst_rate == 5){
+                        if (selling_rate <= 1000) {
+                            gst_5 += taxable_value;
+                        } else {
+                            gst_rate = parseFloat(12).toFixed(2);
+                            gst_12 += taxable_value;
+                        }
                 }
-
-            }
-
-
-        } else {
-
-            if (against_h_form == 1) {
-                gst_rate = parseFloat(0.1).toFixed(2);
-                igst_0_1 += taxable_value;
-            } else {
-                if (selling_rate <= 1000) {
-                    gst_rate = parseFloat(5).toFixed(2);
-                    igst_5 += taxable_value;
-                } else {
-                    gst_rate = parseFloat(12).toFixed(2);
-                    igst_12 += taxable_value;
+                if(gst_rate == 12){
+                    if (selling_rate <= 1000) {
+                            gst_5 += taxable_value;
+                        } else {
+                            gst_rate = parseFloat(12).toFixed(2);
+                            gst_12 += taxable_value;
+                        }
                 }
+                if(gst_rate == 18)
+                        gst_18 += taxable_value;                
             }
-        }
-
-
+     
         net = total;
 
         $("#element-" + i + " .mrp").text(mrp);
@@ -338,15 +318,20 @@ function calculateTotal() {
         i++;
         barcode = $("#element-" + i + " .barcode").val();
     }
-    if (cgst_2_5 > 0 || cgst_6 > 0 || cgst_0_05 > 0)
-        cgst_sum += parseFloat(+percentage(cgst_2_5, 2.5) + +percentage(cgst_6, 6) + +percentage(cgst_0_05, 0.05));
-
-    sgst_sum = cgst_sum;
-
-    if (igst_5 > 0 || igst_12 > 0 || igst_0_1 > 0) {
-        igst_sum = parseFloat(+percentage(igst_5, 5) + +percentage(igst_12, 12) + +percentage(igst_0_1, 0.1));
+    
+    if (gst_type == "S") {
+        if (gst_1 > 0 || gst_5 > 0 || gst_12 > 0 || gst_18 > 0)
+            cgst_sum += parseFloat(+percentage(gst_1, 0.05) + +percentage(gst_5, 2.5) + +percentage(gst_12, 6) + +percentage(gst_18, 9));
+        sgst_sum = cgst_sum;
+    }else{
+        if (gst_1 > 0 || gst_5 > 0 || gst_12 > 0 || gst_18 > 0)
+            igst_sum += parseFloat(+percentage(gst_1, 0.1) + +percentage(gst_5, 5) + +percentage(gst_12, 12) + +percentage(gst_18, 18));
+        
     }
+    
+    
 
+    
     //alert(igst_sum);alert(cgst_sum);alert(sgst_sum);
     net_sum = bill_sum - discount_sum + sgst_sum + cgst_sum + igst_sum;
     if (transport_charges)
@@ -582,10 +567,10 @@ function printEAN() {
 function printEAN_New() {
 
     if (qz) {
-        var config = qz.configs.create("TSC TTP-247")
+        var config = qz.configs.create("TSC TE210")
     } else {
         qz = document.getElementById('qz');
-        config = qz.configs.create("TSC TTP-247")
+        config = qz.configs.create("TSC TE210")
     }
 
     var date = new Date();
@@ -595,11 +580,15 @@ function printEAN_New() {
     var print = print_array;
     qz_array.push("N\n");
     qz_array.push("q359\n");
-    qz_array.push("Q609,26\n");
+    qz_array.push("Q679,26\n");
     qz_array.push('TDdd me y4\n');
     var c = 0;
     $.each(print, function(key, value) {
-        pEAN_New(key, value, date_string);
+        var category = value['category'];
+        if(category == "BOYS" || category == "GIRLS")
+            pEAN_New(key, value, date_string);
+        else
+            pEAN_New(key, value, date_string);
         c++;
     });
     if (odd) {
@@ -640,7 +629,7 @@ function printEAN_New() {
     //   monitorPrinting(qz);
 }
 
-
+/*
 function pEAN_New(key, value, date_string) {
     var ean = value['ean'];
     var quantity = value['quantity'];
@@ -696,66 +685,179 @@ function pEAN_New(key, value, date_string) {
 
 
 }
+*/
+
+function pEAN_New(key, value, date_string) {
+    var ean = value['ean'];
+    var quantity = value['quantity'];
+    var design = value['design'];
+    var color = value['color'];
+    var size = value['size'];
+    var mrp = value['mrp'];
+    var identifier = value['identifier'];
+    var category = value['category'];
+    var sizeInCm = value['sizeInCm'];
+    var net_quantity = value['net_quantity'];
+    
+    var net_quantity_array = net_quantity.split(',');
+    
+    var net_quantity_array_length = net_quantity_array.length;
+    
+        while(quantity>0){
+        qz_array.push('\nN\n');
+        
+        qz_array.push('B10,30,0,E30,3,2,70,B,"' + ean + '"\n');
+
+        qz_array.push('LO10,116,330,4 \n');
+        qz_array.push('A10,127,0,2,1,1,N,"  MRP(Inclu. of all taxes)"\n');
+        qz_array.push('A20,153,0,4,1,1,N,"    Rs. ' + mrp + '"\n');
+        qz_array.push('LO10,179,330,4 \n');
+        qz_array.push('A20,190,0,3,1,1,N,"Size: ' + size +"("+ sizeInCm +")" + '"\n');
+        qz_array.push('LO10,216,330,4 \n');
+ 
+        qz_array.push('A20,227,0,2,1,1,N,"' + category + '"\n');
+        qz_array.push('A200,227,0,2,1,1,N,"' + design + '"\n');
+        qz_array.push('A20,253,0,2,1,1,N,"' + color + '"\n');
+        qz_array.push('A200,253,0,2,1,1,N,"' + identifier + '"\n');
+        
+        qz_array.push('A20,277,0,2,1,1,N,"Net Qty: "\n');
+        qz_array.push('A200,277,0,2,1,1,N,"Pkd.On:"\n');
+        
+        if(net_quantity_array_length == 1)
+        {
+           qz_array.push('A30,309,0,2,1,1,N,"  '+net_quantity_array[0]+'"\n');
+           qz_array.push('A250,309,0,2,1,1,N,"'+date_string+'"\n'); 
+        }
+
+        if(net_quantity_array_length == 2){
+            qz_array.push('A30,298,0,1,1,1,N,"'+net_quantity_array[0]+'"\n');
+        
+            qz_array.push('A30,311,0,1,1,1,N,"'+net_quantity_array[1]+'"\n');
+            qz_array.push('A250,311,0,1,1,1,N,"'+date_string+'"\n');
+        }  
+
+        if(net_quantity_array_length == 3){
+        qz_array.push('A30,298,0,1,1,1,N,"'+net_quantity_array[0]+'"\n');
+        
+        qz_array.push('A30,310,0,1,1,1,N,"'+net_quantity_array[1]+'"\n');
+        qz_array.push('A250,310,0,1,1,1,N,"'+date_string+'"\n');
+        
+        qz_array.push('A30,321,0,1,1,1,N,"'+net_quantity_array[2]+'"\n');
+        }  
+
+        
+        
+        qz_array.push('LO10,336,330,4 \n');
+
+        qz_array.push('A20,348,0,3,1,1,N,"   Manufactured By: "\n');
+        
+        qz_array.push('A10,379,0,2,1,1,N,"Vamas Fashion Private Ltd."\n');
+        
+        qz_array.push('A10,408,0,2,1,1,N,"C-22,Neelkanth Business Park"\n');
+        
+        qz_array.push('A10,437,0,2,1,1,N,"Vidyaivhar(W),Village:Kirol,"\n');
+        qz_array.push('A10,466,0,2,1,1,N,"Taluka:Kurla,District:Mumbai, "\n');
+        qz_array.push('A10,495,0,2,1,1,N,"India,Maharashtra,PIN:400086."\n');
+        
+        qz_array.push('LO10,524,330,5 \n');
+        qz_array.push('A10,534,0,2,1,1,N,"For complaints/feedback,pls"\n');
+        qz_array.push('A10,563,0,2,1,1,N,"write to our customer care"\n');
+        qz_array.push('A10,592,0,2,1,1,N," at above address or email"\n');
+        qz_array.push('A10,621,0,3,1,1,N,"   support@vamas.in"\n');
+        qz_array.push('A10,650,0,3,1,1,N,"     022-25020792 "\n');
+        qz_array.push('\nP1,1\n');
+        total_barcodes_printed++;
+        quantity--;
+        }
 
 
-function getSizeInCM(size){
+}
+
+
+function getSizeInCM(size, category){
     var sizeInCm = [];
-    sizeInCm['26'] = "66cm";
-    sizeInCm['28'] = "71cm";
-    sizeInCm['30'] = "76cm";
-    sizeInCm['32'] = "81cm";
-    sizeInCm['34'] = "86cm";
-    sizeInCm['36'] = "91cm";
-    sizeInCm['38'] = "96cm";
-    sizeInCm['40'] = "101cm";
-    sizeInCm['42'] = "106cm";
-    sizeInCm['44'] = "111cm";
-    sizeInCm['46'] = "116cm";
-    sizeInCm['48'] = "121cm";
-    sizeInCm['50'] = "126cm";
-    sizeInCm['52'] = "131cm";
-    sizeInCm['54'] = "136cm";
-    sizeInCm['56'] = "141cm";
-    sizeInCm['58'] = "146cm";
-    sizeInCm['60'] = "151cm";
+    sizeInCm['26'] = "66CM";
+    sizeInCm['28'] = "71CM";
+    sizeInCm['30'] = "76CM";
+    sizeInCm['32'] = "81CM";
+    sizeInCm['34'] = "86CM";
+    sizeInCm['36'] = "91CM";
+    sizeInCm['38'] = "96CM";
+    sizeInCm['40'] = "101CM";
+    sizeInCm['42'] = "106CM";
+    sizeInCm['44'] = "111CM";
+    sizeInCm['46'] = "116CM";
+    sizeInCm['48'] = "121CM";
+    sizeInCm['50'] = "126CM";
+    sizeInCm['52'] = "131CM";
+    sizeInCm['54'] = "136CM";
+    sizeInCm['56'] = "141CM";
+    sizeInCm['58'] = "146CM";
+    sizeInCm['60'] = "151CM";
     
 
-    sizeInCm['XXS'] = "76cm";
-    sizeInCm['XS'] = "81cm";
-    sizeInCm['S'] = "86cm";
-    sizeInCm['M'] = "91cm";
-    sizeInCm['L'] = "96cm";
-    sizeInCm['XL'] = "101cm";
-    sizeInCm['XXL'] = "106cm";
-    sizeInCm['XXXL'] = "111cm";
-    sizeInCm['3XL'] = "111cm";
-    sizeInCm['4XL'] = "116cm";
+    sizeInCm['XXS'] = "76CM";
+    sizeInCm['XS'] = "81CM";
+    sizeInCm['S'] = "86CM";
+    sizeInCm['M'] = "91CM";
+    sizeInCm['L'] = "96CM";
+    sizeInCm['XL'] = "101CM";
+    sizeInCm['XXL'] = "106CM";
+    sizeInCm['XXXL'] = "111CM";
+    sizeInCm['3XL'] = "111CM";
+    sizeInCm['4XL'] = "116CM";
+
+    sizeInCm['FS'] = "96CM";
 
 
-    sizeInCm['3-6M'] = "Dim:27cm";
-    sizeInCm['6-12M'] = "Dim:27cm";
-    sizeInCm['6-9M'] = "Dim:27cm";
-    sizeInCm['9-12M'] = "Dim:27cm";
-    sizeInCm['12-18M'] = "Dim:27cm";
-    sizeInCm['18-24M'] = "Dim:27cm";
-    sizeInCm['1-2Y'] = "Dim:27cm";
-    sizeInCm['2-3Y'] = "Dim:27cm";
-    sizeInCm['3-4Y'] = "Dim:27cm";
-    sizeInCm['4-5Y'] = "Dim:27cm";
-    sizeInCm['5-6Y'] = "Dim:27cm";
-    sizeInCm['6-7Y'] = "Dim:27cm";
-    sizeInCm['7-8Y'] = "Dim:27cm";
-    sizeInCm['8-9Y'] = "Dim:27cm";
-    sizeInCm['9-10Y'] = "Dim:27cm";
-    sizeInCm['10-11Y'] = "Dim:27cm";
-    sizeInCm['10-12Y'] = "Dim:27cm";
-    sizeInCm['12-14Y'] = "Dim:27cm";
-    sizeInCm['11-12Y'] = "Dim:27cm";
-    sizeInCm['12-13Y'] = "Dim:27cm";
-    sizeInCm['13-14Y'] = "Dim:27cm";
-    sizeInCm['NB'] = "Dim:27cm";
-
-    sizeInCm['FS'] = "96cm";
+    if(category == "GIRLS"){
+    sizeInCm['NB'] = '50CM: 38CM';
+    sizeInCm['3-6M'] = '51CM: 38CM';
+    sizeInCm['6-12M'] = '52CM: 39CM';
+    sizeInCm['6-9M'] = '51CM: 39CM';
+    sizeInCm['9-12M'] = '53CM: 41CM';
+    sizeInCm['12-18M'] = '53CM: 41CM';
+    sizeInCm['18-24M'] = '53CM: 42CM';
+    sizeInCm['1-2Y'] = '53CM: 42CM';
+    sizeInCm['2-3Y'] = '56CM: 43CM';
+    sizeInCm['3-4Y'] = '58CM: 44CM';
+    sizeInCm['4-5Y'] = '61CM: 46CM';
+    sizeInCm['5-6Y'] = '64CM: 47CM';
+    sizeInCm['6-7Y'] = '66CM: 48CM';
+    sizeInCm['7-8Y'] = '69CM: 50CM';
+    sizeInCm['8-9Y'] = '71CM: 51CM';
+    sizeInCm['9-10Y'] = '74CM: 52CM';
+    sizeInCm['10-11Y'] = '76CM: 53CM';
+    sizeInCm['11-12Y'] = '79CM: 55CM';
+    sizeInCm['12-13Y'] = '81CM: 56CM';
+    sizeInCm['13-14Y'] = '84CM: 57CM';
+    sizeInCm['10-12Y'] = '76CM: 53CM';
+    sizeInCm['12-14Y'] = '81CM: 56CM';
+    }
+    if(category == "BOYS"){
+    sizeInCm['NB'] = '58CM: 38CM';
+    sizeInCm['3-6M'] = '60CM: 38CM';
+    sizeInCm['6-12M'] = '62CM: 39CM';
+    sizeInCm['6-9M'] = '61CM: 39CM';
+    sizeInCm['9-12M'] = '61CM: 41CM';
+    sizeInCm['12-18M'] = '62CM: 41CM';
+    sizeInCm['18-24M'] = '64CM: 42CM';
+    sizeInCm['1-2Y'] = '64CM: 42CM';
+    sizeInCm['2-3Y'] = '66CM: 43CM';
+    sizeInCm['3-4Y'] = '69CM: 44CM';
+    sizeInCm['4-5Y'] = '71CM: 46CM';
+    sizeInCm['5-6Y'] = '74CM: 47CM';
+    sizeInCm['6-7Y'] = '76CM: 48CM';
+    sizeInCm['7-8Y'] = '79CM: 50CM';
+    sizeInCm['8-9Y'] = '81CM: 51CM';
+    sizeInCm['9-10Y'] = '84CM: 52CM';
+    sizeInCm['10-11Y'] = '86CM: 53CM';
+    sizeInCm['11-12Y'] = '89CM: 55CM';
+    sizeInCm['12-13Y'] = '92CM: 56CM';
+    sizeInCm['13-14Y'] = '95CM: 57CM';
+    sizeInCm['10-12Y'] = '86CM: 53CM';
+    sizeInCm['12-14Y'] = '94CM: 57CM';
+    }
 
 
     if(sizeInCm[size])
@@ -920,29 +1022,7 @@ function pBEAN(key, value, date_string) {
     var mrp = value['mrp'];
     var identifier = value['identifier'];
     var category = value['category'];
-    var sizeInCm = [];
     
-    sizeInCm['32'] = "81cm";
-    sizeInCm['34'] = "86cm";
-    sizeInCm['36'] = "91cm";
-    sizeInCm['38'] = "96cm";
-    sizeInCm['40'] = "101cm";
-    sizeInCm['42'] = "106cm";
-    sizeInCm['44'] = "111cm";
-    sizeInCm['46'] = "116cm";
-    sizeInCm['48'] = "121cm";
-    sizeInCm['50'] = "126cm";
-    sizeInCm['52'] = "131cm";
-    
-    sizeInCm['M'] = "76cm";
-    sizeInCm['L'] = "81cm";
-    sizeInCm['XL'] = "86cm";
-    sizeInCm['XXL'] = "91cm";
-    sizeInCm['XXXL'] = "100cm";
-    sizeInCm['3XL'] = "106cm";
-    sizeInCm['4XL'] = "112cm";
-
-
     if (odd) {
         qz_array.push('B325,20,0,E30,2,2,70,B,"' + ean + '"\n');
         qz_array.push('A325,110,0,2,1,1,N,"' + category + '"\n');
@@ -951,12 +1031,12 @@ function pBEAN(key, value, date_string) {
         qz_array.push('A515,160,0,2,1,1,N,"' + size + '"\n');
         
         qz_array.push('A325,182,0,2,1,1,N,"' + identifier + '"\n');
-        qz_array.push('A515,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+        qz_array.push('A515,182,0,2,1,1,N,"' + getSizeInCM(size,category) + '"\n');
         qz_array.push('A325,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
         qz_array.push('A325,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
         qz_array.push('A325,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
-        qz_array.push('A325,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
-        qz_array.push('A325,295,0,1,1,1,N,"our cust.care executive at"\n');
+        qz_array.push('A325,273,0,1,1,1,N,"For compl.,pls. contact"\n');
+        qz_array.push('A325,295,0,1,1,1,N,"our cust executive"\n');
         qz_array.push('\nP1,1\n');
         total_barcodes_printed++;
         total_print_documents++;
@@ -988,8 +1068,8 @@ function pBEAN(key, value, date_string) {
             qz_array.push('A0,182,0,2,1,1,N,"' + identifier + '"\n');
             qz_array.push('A325,182,0,2,1,1,N,"' + identifier + '"\n');
             
-            qz_array.push('A190,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
-            qz_array.push('A515,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+            qz_array.push('A190,182,0,2,1,1,N,"' + getSizeInCM(size,category) + '"\n');
+            qz_array.push('A515,182,0,2,1,1,N,"' + getSizeInCM(size,category) + '"\n');
 
 
             qz_array.push('A0,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
@@ -1001,11 +1081,11 @@ function pBEAN(key, value, date_string) {
             qz_array.push('A0,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
             qz_array.push('A325,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
 
-            qz_array.push('A0,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
-            qz_array.push('A325,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
+            qz_array.push('A0,273,0,1,1,1,N,"For compl.,pls. contact"\n');
+            qz_array.push('A325,273,0,1,1,1,N,"For compl.,pls. contact"\n');
 
-            qz_array.push('A0,295,0,1,1,1,N,"our cust.care executive at"\n');
-            qz_array.push('A325,295,0,1,1,1,N,"our cust.care executive at"\n');
+            qz_array.push('A0,295,0,1,1,1,N,"our cust executive"\n');
+            qz_array.push('A325,295,0,1,1,1,N,"our cust executive"\n');
             
 
             qz_array.push('\nP' + set + ',1\n');
@@ -1022,14 +1102,14 @@ function pBEAN(key, value, date_string) {
             qz_array.push('A0,160,0,2,1,1,N,"' + color + '"\n');
             qz_array.push('A190,160,0,2,1,1,N,"' + size + '"\n');
             qz_array.push('A0,182,0,2,1,1,N,"' + identifier + '"\n');
-            qz_array.push('A190,182,0,2,1,1,N,"' + sizeInCm[size] + '"\n');
+            qz_array.push('A190,182,0,2,1,1,N,"' + getSizeInCM(size,category) + '"\n');
 
 
             qz_array.push('A0,207,0,3,1,1,N,"M.R.P. Rs. ' + mrp + '"\n');
             qz_array.push('A0,229,0,1,1,1,N,"(Inclu. of all taxes)"\n');
             qz_array.push('A0,251,0,1,1,1,N,"Pcs 1 Pkd. Dt: ' + date_string + '"\n');
-            qz_array.push('A0,273,0,1,1,1,N,"For cust.compl.,pls.contact"\n');
-            qz_array.push('A0,295,0,1,1,1,N,"our cust.care executive at"\n');
+            qz_array.push('A0,273,0,1,1,1,N,"For compl.,pls. contact"\n');
+            qz_array.push('A0,295,0,1,1,1,N,"our cust executive"\n');
 
 
             total_barcodes_printed++;
