@@ -290,7 +290,7 @@ function calculateTotal() {
                         }
                 }
                 if(gst_rate == 12){
-                    if (selling_rate <= 1000) {
+                    if (selling_rate <= 1000 && selling_rate >= 2) {
                             gst_rate = parseFloat(5).toFixed(2);
                             gst_5 += taxable_value;
                         } else {
